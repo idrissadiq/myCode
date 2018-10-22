@@ -1,0 +1,29 @@
+package carsandfractions;
+
+/* Idris Sadiq
+
+** 04/26/2017
+
+** This driver program demonstrates the functionality of two classes, namely  
+   Car and Fractions.
+*/
+
+public class Driver {
+    
+    public static void main(String[] args) {
+        // Testing Car class functionality
+        Car sedan = new Car("Honda", "Accord", 35.5, 2017, 7135, 62.4, 22.3);
+        sedan.fillTank(4.4);    // Testing fillTank method
+        sedan.drive(79);    // Testing drive method
+        System.out.println(sedan);  // Testing toString method
+        System.out.println(sedan.getFuelRemaining()); // Testing getFuelRemaining method
+        
+        // Testing Fractions class functionality
+        Fractions ratio = new Fractions(3, 4);
+        ratio = ratio.add(new Fractions(16, 16));   // Testing add method
+        System.out.println("Are the fractions equal? " + new Fractions(3,4).equals(new Fractions(3,6))); // Testing equals method
+        System.out.println(ratio); // Testing toString method
+        
+    }
+    
+}
