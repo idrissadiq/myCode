@@ -1,0 +1,538 @@
+# Idris Sadiq
+#
+# 09/15/2018
+#
+# This is a MIPS assembly program that effectively checks the syntax of a
+# user's input in accordance to the MATLAB syntax. The program prompts the user
+# for an expression then evalutes the expression for validity in the same way MATLAB would
+
+.data
+prompt: .asciiz ">>> "
+valid:	.asciiz "Valid input\n"
+invalid: .asciiz "Invalid input\n"
+inputString: .space 64
+
+.text
+main: 	
+	# Diplay prompt			
+	la	$a0, prompt
+	li	$v0, 4
+	syscall
+	# Read user argument
+	la	$a0, inputString	# Store argument
+	li	$a1, 65
+	li	$v0, 8
+	syscall
+	add	$s0, $zero, $zero	# Counter i = 0
+	add	$s1, $zero, $zero	# Counter j = 0
+	add	$s2, $zero, $zero	# Counter k = 0
+	add	$t1, $s0, $a0		# Store addrsss of i-th argument
+	lbu	$t2, 0($t1)		# Load byte into $t2 
+	
+check:
+	# Check if character is 0 - 9, a - z, A - Z, +, -, *, /, =, or ()
+	# If byte = 0 branch to label
+	li	$t3, '0'
+	beq	$t2, $t3, validInput
+	# Else check if it's a 1
+	li	$t3, '1'
+	beq	$t2, $t3, validInput
+	# Else check if it's a 2
+	li	$t3, '2'
+	beq	$t2, $t3, validInput
+	# Else check if it's a 3
+	li	$t3, '3'
+	beq	$t2, $t3, validInput
+	# Else check if it's a 4
+	li	$t3, '4'
+	beq	$t2, $t3, validInput
+	# Else check if it's a 5
+	li	$t3, '5'
+	beq	$t2, $t3, validInput
+	# Else check if it's a 6
+	li	$t3, '6'
+	beq	$t2, $t3, validInput
+	# Else check if it's a 7
+	li	$t3, '7'
+	beq	$t2, $t3, validInput
+	# Else check if it's a 8
+	li	$t3, '8'
+	beq	$t2, $t3, validInput
+	# Else check if it's a 9
+	li	$t3, '9'
+	beq	$t2, $t3, validInput
+	# Else check if it's an a
+	li	$t3, 'a'
+	beq	$t2, $t3, validInput
+	# Else check if it's a b
+	li	$t3, 'b'
+	beq	$t2, $t3, validInput
+	# Else check if it's a c
+	li	$t3, 'c'
+	beq	$t2, $t3, validInput
+	# Else check if it's a d
+	li	$t3, 'd'
+	beq	$t2, $t3, validInput
+	# Else check if it's a e
+	li	$t3, 'e'
+	beq	$t2, $t3, validInput
+	# Else check if it's a f
+	li	$t3, 'f'
+	beq	$t2, $t3, validInput
+	# Else check if it's a g
+	li	$t3, 'g'
+	beq	$t2, $t3, validInput
+	# Else check if it's a h
+	li	$t3, 'h'
+	beq	$t2, $t3, validInput
+	# Else check if it's a i
+	li	$t3, 'i'
+	beq	$t2, $t3, validInput
+	# Else check if it's a j
+	li	$t3, 'j'
+	beq	$t2, $t3, validInput
+	# Else check if it's a k
+	li	$t3, 'k'
+	beq	$t2, $t3, validInput
+	# Else check if it's a l
+	li	$t3, 'l'
+	beq	$t2, $t3, validInput
+	# Else check if it's a m
+	li	$t3, 'm'
+	beq	$t2, $t3, validInput
+	# Else check if it's a n
+	li	$t3, 'n'
+	beq	$t2, $t3, validInput
+	# Else check if it's a o
+	li	$t3, 'o'
+	beq	$t2, $t3, validInput
+	# Else check if it's a p
+	li	$t3, 'p'
+	beq	$t2, $t3, validInput
+	# Else check if it's a q
+	li	$t3, 'q'
+	beq	$t2, $t3, validInput
+	# Else check if it's a r
+	li	$t3, 'r'
+	beq	$t2, $t3, validInput
+	# Else check if it's an s
+	li	$t3, 's'
+	beq	$t2, $t3, validInput
+	# Else check if it's a t
+	li	$t3, 't'
+	beq	$t2, $t3, validInput
+	# Else check if it's a u
+	li	$t3, 'u'
+	beq	$t2, $t3, validInput
+	# Else check if it's a v
+	li	$t3, 'v'
+	beq	$t2, $t3, validInput
+	# Else check if it's a w
+	li	$t3, 'w'
+	beq	$t2, $t3, validInput
+	# Else check if it's a x
+	li	$t3, 'x'
+	beq	$t2, $t3, validInput
+	# Else check if it's a y
+	li	$t3, 'y'
+	beq	$t2, $t3, validInput
+	# Else check if it's a z
+	li	$t3, 'z'
+	beq	$t2, $t3, validInput
+	# Else check if it's a A
+	li	$t3, 'A'
+	beq	$t2, $t3, validInput
+	# Else check if it's a B
+	li	$t3, 'B'
+	beq	$t2, $t3, validInput
+	# Else check if it's a C
+	li	$t3, 'C'
+	beq	$t2, $t3, validInput
+	# Else check if it's a D
+	li	$t3, 'D'
+	beq	$t2, $t3, validInput
+	# Else check if it's a E
+	li	$t3, 'E'
+	beq	$t2, $t3, validInput
+	# Else check if it's a F
+	li	$t3, 'F'
+	beq	$t2, $t3, validInput
+	# Else check if it's a G
+	li	$t3, 'G'
+	beq	$t2, $t3, validInput
+	# Else check if it's a H
+	li	$t3, 'H'
+	beq	$t2, $t3, validInput
+	# Else check if it's a I
+	li	$t3, 'I'
+	beq	$t2, $t3, validInput
+	# Else check if it's a J
+	li	$t3, 'J'
+	beq	$t2, $t3, validInput
+	# Else check if it's a K
+	li	$t3, 'K'
+	beq	$t2, $t3, validInput
+	# Else check if it's a L
+	li	$t3, 'L'
+	beq	$t2, $t3, validInput
+	# Else check if it's a M
+	li	$t3, 'M'
+	beq	$t2, $t3, validInput
+	# Else check if it's a N
+	li	$t3, 'N'
+	beq	$t2, $t3, validInput
+	# Else check if it's a O
+	li	$t3, 'O'
+	beq	$t2, $t3, validInput
+	# Else check if it's a P
+	li	$t3, 'P'
+	beq	$t2, $t3, validInput
+	# Else check if it's a Q
+	li	$t3, 'Q'
+	beq	$t2, $t3, validInput
+	# Else check if it's a R
+	li	$t3, 'R'
+	beq	$t2, $t3, validInput
+	# Else check if it's an S
+	li	$t3, 'S'
+	beq	$t2, $t3, validInput
+	# Else check if it's a T
+	li	$t3, 'T'
+	beq	$t2, $t3, validInput
+	# Else check if it's a U
+	li	$t3, 'U'
+	beq	$t2, $t3, validInput
+	# Else check if it's a V
+	li	$t3, 'V'
+	beq	$t2, $t3, validInput
+	# Else check if it's a W
+	li	$t3, 'W'
+	beq	$t2, $t3, validInput
+	# Else check if it's a X
+	li	$t3, 'X'
+	beq	$t2, $t3, validInput
+	# Else check if it's a Y
+	li	$t3, 'Y'
+	beq	$t2, $t3, validInput
+	# Else check if it's a Z
+	li	$t3, 'Z'
+	beq	$t2, $t3, validInput
+	# Else check if it's a space
+	li	$t3, ' '
+	beq	$t2, $t3, validInput
+symbols:
+	# Else check if it's a +
+	li	$t3, '+'
+	beq	$t2, $t3, plusSymbol
+	# Else check if it's a -
+	li	$t3, '-'
+	beq	$t2, $t3, minusSymbol
+	# Else check if it's a *
+	li	$t3, '*'
+	beq	$t2, $t3, starSymbol
+	# Else check if it's a /
+	li	$t3, '/'
+	beq	$t2, $t3, divideSymbol
+	# Else check if it's a =
+	li	$t3, '='
+	beq	$t2, $t3, validInput
+	# Else check if it's a (
+	li	$t3, '('
+	beq	$t2, $t3, openPChecker
+	# Else check if it's a )
+	li	$t3, ')'
+	beq	$t2, $t3, closedPChecker
+	# Check for null character
+	beq	$t2, '\n', finish
+	# If non of the above, then the character is invalid
+	j	invalidInput
+validInput:
+	add	$s0, $s0, 1		# Increment index i
+	add	$t1, $s0, $a0		# Store addrsss of i-th argument
+	lbu	$t2, 0($t1)		# Load next byte
+	j	check
+invalidInput:
+	# Diplay invalid message
+	la	$a0, invalid
+	li	$v0, 4
+	syscall
+	j	main
+plusSymbol:
+	add	$s0, $s0, 1		# Increment index i
+	add	$t1, $s0, $a0		# Store addrsss of i-th argument
+	lbu	$t2, 0($t1)		# Load next byte
+	# Check if next char is a /
+	li	$t3, '/'
+	beq	$t2, $t3, invalidInput
+	# Check if next char is a *
+	li	$t3, '*'
+	beq	$t2, $t3, invalidInput
+	# Else jump
+	j	check
+minusSymbol:
+	add	$s0, $s0, 1		# Increment index i
+	add	$t1, $s0, $a0		# Store addrsss of i-th argument
+	lbu	$t2, 0($t1)		# Load next byte
+	# Check if next char is a /
+	li	$t3, '/'
+	beq	$t2, $t3, invalidInput
+	# Check if next char is a *
+	li	$t3, '*'
+	beq	$t2, $t3, invalidInput
+	# Else jump
+	j	check
+divideSymbol:
+	add	$s0, $s0, 1		# Increment index i
+	add	$t1, $s0, $a0		# Store addrsss of i-th argument
+	lbu	$t2, 0($t1)		# Load next byte
+	# Check if next char is a /
+	li	$t3, '/'
+	beq	$t2, $t3, invalidInput
+	# Check if next char is a *
+	li	$t3, '*'
+	beq	$t2, $t3, invalidInput
+	# Check if it's a )
+	li	$t3, ')'
+	beq	$t2, $t3, invalidInput
+	# Else jump
+	j	check
+starSymbol:
+	add	$s0, $s0, 1		# Increment index i
+	add	$t1, $s0, $a0		# Store addrsss of i-th argument
+	lbu	$t2, 0($t1)		# Load next byte
+	# Check if next char is a /
+	li	$t3, '/'
+	beq	$t2, $t3, invalidInput
+	# Check if next char is a *
+	li	$t3, '*'
+	beq	$t2, $t3, invalidInput
+	# Check if it's a )
+	li	$t3, ')'
+	beq	$t2, $t3, invalidInput
+	# Else jump
+	j	check
+openPChecker:
+	add	$s0, $s0, 1		# Increment index i
+	add	$t1, $s0, $a0		# Store addrsss of i-th argument
+	lbu	$t2, 0($t1)		# Load next byte
+	add	$s1, $s1, 1		# Increment j
+	# Check if next char is a (
+	li	$t3, '('
+	beq	$t2, $t3, openPChecker
+	# Check if it's a )
+	li	$t3, ')'
+	beq	$t2, $t3, closedPChecker
+	# Check if it's a /
+	li	$t3, '/'
+	beq	$t2, $t3, invalidInput
+	# Check if it's a *
+	li	$t3, '*'
+	beq	$t2, $t3, invalidInput
+	j	check
+closedPChecker:
+	add	$s0, $s0, 1		# Increment index i
+	add	$t1, $s0, $a0		# Store addrsss of i-th argument
+	lbu	$t2, 0($t1)		# Load next byte
+	add	$s2, $s2, 1		# Increment k
+	# Check if next char is a )
+	li	$t3, ')'
+	beq	$t2, $t3, closedPChecker
+	# Check if it's a (
+	li	$t3, '('
+	beq	$t2, $t3, openPChecker
+	# Check if it's a 0
+	li	$t3, '0'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a 1
+	li	$t3, '1'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a 2
+	li	$t3, '2'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a 3
+	li	$t3, '3'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a 4
+	li	$t3, '4'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a 5
+	li	$t3, '5'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a 6
+	li	$t3, '6'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a 7
+	li	$t3, '7'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a 8
+	li	$t3, '8'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a 9
+	li	$t3, '9'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's an a
+	li	$t3, 'a'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a b
+	li	$t3, 'b'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a c
+	li	$t3, 'c'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a d
+	li	$t3, 'd'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a e
+	li	$t3, 'e'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a f
+	li	$t3, 'f'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a g
+	li	$t3, 'g'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a h
+	li	$t3, 'h'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a i
+	li	$t3, 'i'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a j
+	li	$t3, 'j'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a k
+	li	$t3, 'k'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a l
+	li	$t3, 'l'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a m
+	li	$t3, 'm'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a n
+	li	$t3, 'n'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a o
+	li	$t3, 'o'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a p
+	li	$t3, 'p'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a q
+	li	$t3, 'q'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a r
+	li	$t3, 'r'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's an s
+	li	$t3, 's'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a t
+	li	$t3, 't'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a u
+	li	$t3, 'u'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a v
+	li	$t3, 'v'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a w
+	li	$t3, 'w'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a x
+	li	$t3, 'x'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a y
+	li	$t3, 'y'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a z
+	li	$t3, 'z'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a A
+	li	$t3, 'A'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a B
+	li	$t3, 'B'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a C
+	li	$t3, 'C'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a D
+	li	$t3, 'D'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a E
+	li	$t3, 'E'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a F
+	li	$t3, 'F'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a G
+	li	$t3, 'G'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a H
+	li	$t3, 'H'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a I
+	li	$t3, 'I'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a J
+	li	$t3, 'J'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a K
+	li	$t3, 'K'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a L
+	li	$t3, 'L'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a M
+	li	$t3, 'M'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a N
+	li	$t3, 'N'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a O
+	li	$t3, 'O'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a P
+	li	$t3, 'P'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a Q
+	li	$t3, 'Q'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a R
+	li	$t3, 'R'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's an S
+	li	$t3, 'S'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a T
+	li	$t3, 'T'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a U
+	li	$t3, 'U'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a V
+	li	$t3, 'V'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a W
+	li	$t3, 'W'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a X
+	li	$t3, 'X'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a Y
+	li	$t3, 'Y'
+	beq	$t2, $t3, invalidInput
+	# Else check if it's a Z
+	li	$t3, 'Z'
+	beq	$t2, $t3, invalidInput
+	j	symbols
+finish:
+	# Check if number of parenthesis are equal
+	bne	$s1, $s2, invalidInput
+	
+	# Diplay valid	message
+	la	$a0, valid
+	li	$v0, 4
+	syscall
+	j	main
