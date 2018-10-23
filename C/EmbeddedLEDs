@@ -1,0 +1,79 @@
+/*
+*	Idris Sadiq
+*
+*	02/12/2018
+*
+*	This program is part of a Vivado embedded system project using
+*	a Xilinx Zybo FPGA and ARM processor developement board. The hardware
+*	referenced in this program is included in a seperate file as this code
+*	is only used as an example of how to control the on-board LEDs using C
+*/
+
+// Include Files
+#include "stdio.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "xil_printf.h"
+
+// Definitions
+#define LED_DELAY 100000000							// Software delay length
+#define printf xil_printf							// Smaller, optimized printf
+#define BTNS_DEVICE_ID XPAR_AXI_GPIO_1_DEVICE_ID	// GPIO device that LEDs are connected to
+#define LEDS_DEVICE_ID XPAR_AXI_GPIO_0_DEVICE_ID	// GPIO device that buttons are connected to
+
+XGpio LEDInst, BTNInst;								// GPIO Device driver instances
+
+// Main function
+int main(void){
+
+	volatile int Delay;
+	static int btn_value;
+	int status;
+	int count = 0x0;
+	int led = 0x0;
+
+	// Initialize LEDs
+	status = XGpio_Initialize(&LEDInst, LEDS_DEVICE_ID);
+	if (status != XST_SUCCESS) return XST_FAILURE;
+
+	// Initialize Push Buttons
+	status = XGpio_Initialize(&BTNInst, BTNS_DEVICE_ID);
+	if (status != XST_SUCCESS) return XST_FAILURE;
+
+	// Set LEDs direction to outputs
+	XGpio_SetDataDirection(&LEDInst, 1, 0x00);
+
+	// Set buttons direction to inputs
+	XGpio_SetDataDirection(&BTNInst, 1, 0xFF);
+
+				// Loop forever
+				while (1) {
+
+					btn_value = XGpio_DiscreteRead(&BTNInst, 1);	// Read button presses
+
+					if (btn_value == 0x8){	// Check if button 3 is pressed
+						count = (led - 1) + 8;	// Add 8 to current LED value
+					}
+					else if (btn_value == 0x4){	// Check if button 2 is pressed
+						count = (led - 1) + 4;	// Add 4 to current LED value
+					}
+					else if (btn_value == 0x2){	// Check if button 1 is pressed
+						count = (led - 1) + 2;	// Add 2 to current LED value
+					}
+					else if (btn_value == 0x1){	// Check if button 0 is pressed
+						count = 0;			// Reset count to 0
+					}
+					else{	// If no buttons are pressed, count LED
+						led = count;
+						XGpio_DiscreteWrite(&LEDInst, 1, led); // Write output to the LEDs
+						led++;
+						count = led;
+						xil_printf("Hello World\n");
+					}
+
+					//Delay
+					for (Delay = 0; Delay < LED_DELAY; Delay++);
+				}
+	return 0;
+}
